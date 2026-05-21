@@ -3,64 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stardew Spreadsheet Restore</title>
+  <title>Stardew Step Manip</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="shell">
     <section class="hero">
-      <p class="eyebrow">GitHub Pages Ready</p>
-      <h1>Restore the Step Manip spreadsheet to its default state</h1>
+      <p class="eyebrow">Browser App</p>
+      <h1>Stardew Valley Step Manip</h1>
       <p class="lede">
-        This browser version uses a bundled pristine workbook and downloads a clean copy for you.
-        Browsers cannot overwrite files on disk directly, so restore means download.
-        This hosted page is only the restore tool, not the full save parser desktop app.
+        Upload a Stardew Valley save file, let the page extract the spreadsheet inputs, then calculate the step manipulation results in-browser.
       </p>
     </section>
 
     <section class="panel">
       <div class="panel-header">
-        <h2>Restore</h2>
+        <div>
+          <h2>Save File</h2>
+          <p class="panel-copy">Pick the actual save XML file, not SaveGameInfo.</p>
+        </div>
         <span class="status" id="status-pill">Ready</span>
       </div>
 
-      <label class="dropzone" for="spreadsheet-input" id="dropzone">
-        <input id="spreadsheet-input" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-        <span class="dropzone-title">Choose your spreadsheet</span>
+      <label class="dropzone" for="save-input" id="dropzone">
+        <input id="save-input" type="file" accept=".xml,*/*">
+        <span class="dropzone-title">Choose Stardew save file</span>
         <span class="dropzone-copy">
-          Optional. If you upload a modified workbook, the restored download will keep the same filename.
+          The page reads the save locally in your browser. Nothing is uploaded anywhere.
         </span>
       </label>
 
       <div class="file-card" id="file-card" hidden>
         <div>
-          <p class="file-label">Selected file</p>
+          <p class="file-label">Selected save</p>
           <p class="file-name" id="file-name"></p>
         </div>
         <button type="button" class="ghost-button" id="clear-button">Clear</button>
       </div>
 
       <div class="actions">
-        <button type="button" class="primary-button" id="restore-button">Download Restored Spreadsheet</button>
-        <button type="button" class="secondary-button" id="default-button">Download Default Copy</button>
+        <button type="button" class="primary-button" id="analyze-button">Analyze Save</button>
+        <button type="button" class="secondary-button" id="download-button">Download Default Spreadsheet</button>
       </div>
 
       <p class="hint" id="result-text">
-        The default workbook is served from <code>docs/assets/Spreadsheet.Default.xlsx</code>.
+        The workbook template is bundled with the site. Browser calculation depends on the bundled JS spreadsheet engine.
       </p>
     </section>
 
-    <section class="panel panel-muted">
-      <h2>How to host</h2>
-      <ol>
-        <li>Push this repository to GitHub.</li>
-        <li>In GitHub, open <code>Settings &gt; Pages</code>.</li>
-        <li>Set the source to <code>Deploy from a branch</code>, choose your main branch, and select the <code>/docs</code> folder.</li>
-        <li>Wait for the site URL to appear, then open it and use the restore buttons.</li>
-      </ol>
+    <section class="grid">
+      <section class="panel">
+        <h2>Extracted Inputs</h2>
+        <div class="kv-grid" id="input-grid"></div>
+      </section>
+
+      <section class="panel panel-muted">
+        <h2>Warnings</h2>
+        <ul class="plain-list" id="warnings-list">
+          <li>No save loaded yet.</li>
+        </ul>
+      </section>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <h2>Prediction Results</h2>
+          <p class="panel-copy" id="summary-text">Upload a save file to generate predictions.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Add. Steps</th>
+              <th>Total Steps</th>
+              <th>Dish</th>
+              <th>Mail NPC</th>
+              <th>Gift</th>
+              <th>Luck</th>
+              <th>Weather</th>
+              <th>Island</th>
+            </tr>
+          </thead>
+          <tbody id="results-body">
+            <tr>
+              <td colspan="8" class="empty-cell">No results yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Met NPCs</h2>
+      <div class="table-wrap npc-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>NPC</th>
+              <th>Hearts</th>
+            </tr>
+          </thead>
+          <tbody id="npc-body">
+            <tr>
+              <td colspan="2" class="empty-cell">No save loaded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
