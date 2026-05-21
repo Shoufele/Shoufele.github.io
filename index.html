@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stardew Spreadsheet Restore</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">GitHub Pages Ready</p>
+      <h1>Restore the Step Manip spreadsheet to its default state</h1>
+      <p class="lede">
+        This browser version uses a bundled pristine workbook and downloads a clean copy for you.
+        Browsers cannot overwrite files on disk directly, so restore means download.
+        This hosted page is only the restore tool, not the full save parser desktop app.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Restore</h2>
+        <span class="status" id="status-pill">Ready</span>
+      </div>
+
+      <label class="dropzone" for="spreadsheet-input" id="dropzone">
+        <input id="spreadsheet-input" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        <span class="dropzone-title">Choose your spreadsheet</span>
+        <span class="dropzone-copy">
+          Optional. If you upload a modified workbook, the restored download will keep the same filename.
+        </span>
+      </label>
+
+      <div class="file-card" id="file-card" hidden>
+        <div>
+          <p class="file-label">Selected file</p>
+          <p class="file-name" id="file-name"></p>
+        </div>
+        <button type="button" class="ghost-button" id="clear-button">Clear</button>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="primary-button" id="restore-button">Download Restored Spreadsheet</button>
+        <button type="button" class="secondary-button" id="default-button">Download Default Copy</button>
+      </div>
+
+      <p class="hint" id="result-text">
+        The default workbook is served from <code>docs/assets/Spreadsheet.Default.xlsx</code>.
+      </p>
+    </section>
+
+    <section class="panel panel-muted">
+      <h2>How to host</h2>
+      <ol>
+        <li>Push this repository to GitHub.</li>
+        <li>In GitHub, open <code>Settings &gt; Pages</code>.</li>
+        <li>Set the source to <code>Deploy from a branch</code>, choose your main branch, and select the <code>/docs</code> folder.</li>
+        <li>Wait for the site URL to appear, then open it and use the restore buttons.</li>
+      </ol>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
